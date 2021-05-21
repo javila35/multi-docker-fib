@@ -1,0 +1,20 @@
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t javila35/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true javila35/react-test npm test
+
+after_success:
+  - docker build -t javila35/multi-client ./client
+  - docker build -t javila35/multi-nginx ./nginx
+  - docker build -t javila35/multi-server ./server
+  - docker build -t javila35/mutli-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
+  - docker push javila35/multi-client
+  - docker push javila35/multi-nginx
+  - docker push javila35/multi-server
+  - docker push javila35/mutli-worker
