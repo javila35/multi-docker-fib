@@ -10,14 +10,14 @@
 		},
 		{
 			"name": "server",
-			"image": "javila/multi-server",
+			"image": "javila35/multi-server",
 			"hostname": "api",
 			"essential": false,
 			"memory": 128
 		},
 		{
 			"name": "worker",
-			"image": "javila35/multi-worker",
+			"image": "javila35/mutli-worker",
 			"hostname": "worker",
 			"essential": false,
 			"memory": 128
